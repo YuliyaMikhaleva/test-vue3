@@ -19,6 +19,8 @@ body{
   height: 100%;
   width: 100%;
   background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
