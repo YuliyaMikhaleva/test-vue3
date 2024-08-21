@@ -1,0 +1,50 @@
+.text-input {
+  position: relative;
+
+  input[type="text"], input[type="password"] {
+    @include fontAdaptive(16px, 19.36px, 400);
+    height: 33px;
+    width: 100%;
+    padding: 7px 10px;
+    background-color: var(--color-white);
+    border: 1px solid rgba(136, 136, 136, 1);;
+    border-radius: 3px;
+    color: var(--color-black);
+    transition: border-color .2s ease-in-out;
+
+    &:focus-visible {
+      + .text-input {
+        &__placeholder {
+          top:-12px;
+          left: 0;
+          @include fontAdaptive(12px, 14.52px, 400);
+          color: var(--color-black);
+        }
+      }
+    }
+  }
+
+  &__placeholder{
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    @include fontAdaptive(16px, 19.36px, 400);
+    color: rgba(136, 136, 136, 1);
+    transition: all 0.3s;
+  }
+
+  &--active {
+    .text-input {
+      &__placeholder {
+        top:-12px;
+        left: 0;
+        font-size: 18px;
+        line-height: 18px;
+        @include fontAdaptive(12px, 14.52px, 400);
+        color: var(--color-black);
+      }
+    }
+  }
+}
