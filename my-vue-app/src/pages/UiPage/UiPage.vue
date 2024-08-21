@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Card from "../../components/_UiComponents/Card/Card.vue";
+import CardList from "../../components/CardList/CardList.vue";
 
 defineProps({
   msg: String,
@@ -12,6 +13,8 @@ const count = ref(0)
 <template>
   <div>
     <Card title="Заголовок" text="Текст" price="6000" />
+    <br>
+    <CardList />
   </div>
 </template>
 
