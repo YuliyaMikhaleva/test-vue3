@@ -1,0 +1,22 @@
+.button {
+  &--circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    background-color: #D9D9D9;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-black);
+    fill: currentColor;
+    box-shadow: 2px 5px 5px rgba(var(--color-black2),0.25);
+
+    &:hover{
+      background-color: rgb(var(--color-blue));
+      color: var(--color-white);
+      box-shadow: 2px 5px 5px rgba(var(--color-blue),0.25);
+    }
+  }
+
+}

@@ -1,5 +1,9 @@
 <template>
   <article class="card">
+    <div class="card__actions">
+      <Button circle action="edit" />
+      <Button circle action="buy" />
+    </div>
     <div class="card__image">
       <picture>
         <img v-if="image" :src="image" alt="">
@@ -14,6 +18,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import Button from "../Button/Button.vue";
 
 defineProps({
   title: {
