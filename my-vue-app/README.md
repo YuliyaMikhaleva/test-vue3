@@ -7,3 +7,7 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 npm init vite@latest my-vue-app --template vue
 cd my-vue-app
 npm run dev
+
+
+pinia
+yarn add pinia
