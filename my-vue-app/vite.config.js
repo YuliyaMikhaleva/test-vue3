@@ -15,6 +15,7 @@ export default defineConfig({
       store: "/src/store",
       templates: "/src/templates",
       icons: "/src/assets/icons",
+      images: "/src/assets/images",
       mixins: "/src/assets/styles/_mixins.scss"
     },
   },
