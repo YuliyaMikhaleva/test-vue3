@@ -40,7 +40,7 @@ defineProps({
 })
 
 onMounted(() => {
-  console.log('mounted card')
+  // console.log('mounted card')
 });
 
 </script>

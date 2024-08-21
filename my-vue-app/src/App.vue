@@ -1,13 +1,13 @@
 <script setup>
-import AppHeader from "./components/AppHeader/AppHeader.vue";
-import AppFooter from "./components/AppFooter/AppFooter.vue";
+// import AppHeader from "./components/AppHeader/AppHeader.vue";
+// import AppFooter from "./components/AppFooter/AppFooter.vue";
 import AppBody from "./components/AppBody/AppBody.vue";
 </script>
 
 <template>
-  <AppHeader />
+<!--  <AppHeader />-->
   <AppBody />
-  <AppFooter />
+<!--  <AppFooter />-->
 </template>
 
 <style lang="scss" scoped>

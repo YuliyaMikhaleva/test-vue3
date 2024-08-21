@@ -1,0 +1,14 @@
+.form {
+  background-color: var(--color-white);
+  box-shadow: 5px 0 5px rgba(var(--color-black2),0.25);
+  padding: 35px 26px;
+
+  &__title {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  &__text {
+    @include fontAdaptive(16px, 19.36px, 400);
+    margin-bottom: 35px;
+  }
+}

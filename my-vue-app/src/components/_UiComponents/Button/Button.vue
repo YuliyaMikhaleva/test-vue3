@@ -31,7 +31,7 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  console.log('mounted Button')
+  // console.log('mounted Button')
 });
 
 </script>
