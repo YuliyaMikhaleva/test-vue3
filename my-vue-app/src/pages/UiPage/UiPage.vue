@@ -21,6 +21,14 @@ const count = ref(0)
     <Button circle action="edit" />
     <br>
     <Form />
+    <br>
+    <Button disabled>Добавить товар</Button>
+    <br>
+    <br>
+    <Button>Добавить товар</Button>
+    <br>
+    <br>
+    <Button cancel>Отменить редактирование</Button>
   </div>
 </template>
 

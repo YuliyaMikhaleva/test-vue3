@@ -15,6 +15,8 @@ const btnRef = ref()
 
 const classes = computed(() => ({
   'button--circle':props.circle,
+  'button--disabled':props.disabled,
+  'button--cancel':props.cancel,
 }));
 
 
@@ -26,6 +28,16 @@ const props = defineProps({
   },
   action: {
     type: String,
+    required: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  cancel: {
+    type: Boolean,
+    default: false,
     required: false,
   }
 })

@@ -1,4 +1,16 @@
 .button {
+  color: var(--color-white);
+  @include fontAdaptive(20px, 24.2px, 400);
+  padding: 10px 20px;
+  width: 100%;
+  background-color: rgb(var(--color-blue));
+  box-shadow: 2px 4px 4px rgba(var(--color-blue),0.25);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(var(--color-blue),0.85);
+  }
+
   &--circle {
     width: 30px;
     height: 30px;
@@ -11,11 +23,27 @@
     color: var(--color-black);
     fill: currentColor;
     box-shadow: 2px 5px 5px rgba(var(--color-black2),0.25);
+    padding: 0;
 
     &:hover{
       background-color: rgb(var(--color-blue));
       color: var(--color-white);
       box-shadow: 2px 5px 5px rgba(var(--color-blue),0.25);
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+    background-color: var(--color-gray2);
+    box-shadow: 2px 4px 4px rgba(#C6BDBD,0.25);
+  }
+
+  &--cancel {
+    background-color: rgba(242, 60, 60, 1);
+    box-shadow: 2px 4px 4px rgba(242, 60, 60, 0.25);
+
+    &:hover {
+      background-color: rgba(242, 60, 60, 0.85);
     }
   }
 
