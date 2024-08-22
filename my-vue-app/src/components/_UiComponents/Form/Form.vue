@@ -7,16 +7,29 @@ import FileInput from "../FileInput/FileInput.vue";
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { numbers } from 'helpers/validation';
-
-const initialState = {
-  title: '',
-  price: '',
-  text: '',
-  photo: null,
-}
+const props = defineProps({
+  circle: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  action: {
+    type: String,
+    required: false,
+  },
+  initialState: {
+    type: Object,
+    default:() => ({})
+  },
+  edit: {
+    type: Boolean,
+    default: false,
+    required: false,
+  }
+})
 
 const productData = ref({
-  ...initialState
+  ...props.initialState
 })
 
 const formRules = {
@@ -30,23 +43,19 @@ const formRules = {
     numbers,
   }
 };
-const emit = defineEmits([ 'add-item' ]);
+const emit = defineEmits([ 'add-item', 'clear-form' ]);
 const v$ = useVuelidate(formRules, productData);
 
-const props = defineProps({
-  circle: {
-    type: Boolean,
-    default: false,
-    required: false,
-  },
-  action: {
-    type: String,
-    required: false,
-  }
-})
+
 watch(productData, (newData, oldPhoto) => {
   console.log('productData', productData.value)
 }, { deep: true })
+
+watchEffect(() => {
+  if (props.initialState) {
+    productData.value = props.initialState
+  }
+})
 
 // // Функция для получения чистого объекта
 // const getPlainObject = () => {
@@ -54,13 +63,14 @@ watch(productData, (newData, oldPhoto) => {
 // };
 
 const disabledButton = computed(() => {
-
   return (productData.value.title) ? false : true
 });
-
+const cancelButton = computed(() => {
+  return (v$.value.$error) ? true : false
+});
 const clearForm = () => {
   productData.value = {
-    ...initialState
+    ...props.initialState
   };
   v$.value.$reset();
 
@@ -71,13 +81,15 @@ const submitHandler = () => {
   if (!v$.value.$error) {
     alert('отправка');
     emit('add-item', productData.value);
+
     clearForm();
+    emit('clear-form')
   }
 }
 
 
 onMounted(() => {
-
+  console.log('props', props)
 });
 
 </script>
@@ -87,10 +99,11 @@ onMounted(() => {
     <p class="form__text">Заполните все обязательные поля с *</p>
     <TextInput class="form__input" placeholder="Название*" v-model="productData.title" :is-error="v$.title.$error" :is-success="v$.title.$dirty && !v$.title.$invalid" error-text="Обязательное поле для заполнения"   @drop-error="v$.title.$reset()"  />
     <TextInput class="form__input" placeholder="Цена*" v-model="productData.price" :is-error="v$.price.$error" :is-success="v$.price.$dirty &&  !v$.price.$invalid" error-text="Обязательное поле для заполнения: только цифры"  @drop-error="v$.price.$reset()"/>
-    <FileInput class="form__input" placeholder="Фото" v-model="productData.photo" />
+    <FileInput class="form__input" placeholder="Фото" v-model="productData.photo" :edit="edit" @remove-file="productData.photo = null"/>
 <!--    <pre>{{ // getPlainObject() }}</pre> &lt;!&ndash; Вызов метода для отображения чистого объекта &ndash;&gt;-->
     <TextArea class="form__input" placeholder="Описание товара" v-model="productData.text"/>
-    <Button :disabled="disabledButton">Добавить товар</Button>
+    <Button class="form__button" :disabled="disabledButton" :cancel="cancelButton">{{ edit ? 'Редактировать товар' : 'Добавить товар' }}</Button>
+    <Button @click="emit('clear-form')" v-if="edit" cancel>Отменить редактирование</Button>
   </form>
 </template>
 

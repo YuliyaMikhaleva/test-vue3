@@ -1,12 +1,11 @@
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  //display: grid;
-  //grid-template-columns: repeat(4, 1fr);
   gap: 50px;
 
   &__card {
     width: 300px;
+    height: fit-content;
   }
 
   &__note {

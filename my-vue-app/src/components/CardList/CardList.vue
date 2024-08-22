@@ -1,18 +1,18 @@
 <template>
   <div class="card-list">
-    <Card class="card-list__card" v-if="list.length>0" v-for="(card, k) in list" :title="card.title" :text="card.text" :price="card.price" :key="k" @remove-item="emit('remove-item', card)" />
+    <Card class="card-list__card" v-if="arrayCards.length>0" v-for="(card, k) in arrayCards" :title="card.title" :text="card.text" :price="card.price" :image="card.photo" :key="k" @remove-item="emit('remove-item', card)" @edit-item="emit('edit-item', card)" />
     <h1 v-else class="card-list__note">
       <TimeIcon />
-      В данный момент товары отсутствуют
+      <span>В данный момент товары отсутствуют</span>
     </h1>
   </div>
 </template>
 
 <script setup>
-import {onMounted, reactive} from 'vue';
+import {computed, onMounted, reactive} from 'vue';
 import Card from "../_UiComponents/Card/Card.vue";
 import TimeIcon from 'icons/timeIcon.svg';
-const emit = defineEmits([ 'remove-item' ]);
+const emit = defineEmits([ 'remove-item', 'edit-item' ]);
 const props = defineProps({
   list: {
     type: Array,
@@ -20,6 +20,7 @@ const props = defineProps({
     required: true,
   },
 })
+const arrayCards = computed(() => props.list)
 
 onMounted(() => {
   console.log('mounted card-list')

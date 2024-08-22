@@ -4,7 +4,7 @@
       <span class="file-input__placeholder file-input__placeholder--file">
         {{ selectedFile.file.name }}
       </span>
-      <div class="file-input__icon file-input__icon--file" @click="selectedFile.file = null">
+      <div class="file-input__icon file-input__icon--file" @click="selectedFile.file = null; emit('remove-file')">
         <DeleteIcon />
       </div>
     </div>
@@ -26,13 +26,13 @@
 
 <script setup>
 import DeleteIcon from 'icons/deleteIcon.svg';
-import {reactive, ref} from 'vue';
+import {reactive, ref, watch} from 'vue';
 import {onMounted} from 'vue';
 const file = ref(File | null)
 const selectedFile = reactive({
   file: null
 })
-const emit = defineEmits([ 'update:modelValue' ]);
+const emit = defineEmits([ 'update:modelValue','remove-file' ]);
 
 const handleFileUpload = ($event) => {
   const target = $event.target;
@@ -53,9 +53,20 @@ const props = defineProps({
     default: () => '',
     required: false,
   },
-
+  edit: {
+    type: Boolean,
+    default:false,
+  },
 })
-
+watch(() => props.modelValue, (value) => {
+  if (!value) {
+    selectedFile.file = null
+  } else {
+    console.log('value', value)
+    selectedFile.file = value;
+    // selectedFile.file = '111'
+  }
+})
 onMounted(() => {
   if (props.modelValue) {
     selectedFile.file = {

@@ -18,7 +18,7 @@ import {computed, watch} from 'vue';
 import {onMounted} from 'vue';
 
 const classes = computed(() => ({
-  'text-input--active':props.modelValue?.length>0,
+  'text-input--active':props.modelValue || props.modelValue?.length>0,
   'text-input--error':props.isError,
   'text-input--success':props.isSuccess,
 
@@ -34,7 +34,7 @@ const emit = defineEmits([
 
 const props = defineProps({
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: () => '',
   },
   placeholder: {
