@@ -6,7 +6,7 @@
   background-color: rgb(var(--color-blue));
   box-shadow: 2px 4px 4px rgba(var(--color-blue),0.25);
   transition: background-color 0.3s;
-
+  border-radius: 3px;
   &:hover {
     background-color: rgba(var(--color-blue),0.85);
   }

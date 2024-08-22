@@ -11,6 +11,7 @@
     border-radius: 3px;
     color: var(--color-black);
     transition: border-color .2s ease-in-out;
+    box-shadow: 2px 4px 4px rgba(#C6BDBD,0.25);
 
     &:focus-visible {
       + .text-input {
