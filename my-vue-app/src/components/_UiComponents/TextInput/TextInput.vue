@@ -34,7 +34,6 @@ const props = defineProps({
     default: () => '',
     required: false,
   },
-
 })
 
 onMounted(() => {

@@ -17,7 +17,7 @@ body{
   @include font(var(--font-inter), 15px, 18.15px, 400);
   min-height: var(--window-height);
   height: 100%;
-  width: 100%;
+  width: 100vw;
   background-color: var(--color-gray);
   display: flex;
   flex-direction: column;
