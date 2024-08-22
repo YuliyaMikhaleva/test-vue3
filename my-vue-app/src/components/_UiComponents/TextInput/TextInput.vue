@@ -3,7 +3,10 @@
     <input
         type="text"
         :value="modelValue"
-        @input="(e) => $emit('update:modelValue',e.target.value)"
+        @input="(e) => {
+          $emit('update:modelValue',e.target.value);
+          emit('drop-error')
+        }"
     >
     <span class="text-input__placeholder">{{placeholder}}</span>
     <div v-if="errorText && isError" class="text-input__error">{{ errorText }}</div>
@@ -11,7 +14,7 @@
 </template>
 
 <script setup>
-import {computed} from 'vue';
+import {computed, watch} from 'vue';
 import {onMounted} from 'vue';
 
 const classes = computed(() => ({
@@ -21,8 +24,9 @@ const classes = computed(() => ({
 
 }));
 
-defineEmits([
-    'update:modelValue'
+const emit = defineEmits([
+    'update:modelValue',
+    'drop-error'
 ]);
 
 
@@ -40,11 +44,11 @@ const props = defineProps({
   },
   isError: {
     type: Boolean,
-    default: false,
+    required: false,
   },
   isSuccess: {
     type: Boolean,
-    default: false,
+    required: false,
   },
   errorText: {
     type: String,

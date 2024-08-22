@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import {reactive, ref} from 'vue'
 import Form from "../../components/_UiComponents/Form/Form.vue";
 import CardList from "../../components/CardList/CardList.vue";
 
@@ -7,7 +7,33 @@ defineProps({
   msg: String,
 })
 
-const count = ref(0)
+const count = ref(0);
+
+const list = ref([
+  {
+    title: 'Заголовок',
+    text: 'Текст',
+    price: 5000
+  },
+  {
+    title: 'Заголовок',
+    text: 'Текст',
+    price: 5000
+  },
+  {
+    title: 'Заголовок',
+    text: 'Текст',
+    price: 5000
+  },
+])
+
+const addItem = (item) => {
+  list.value.push(item)
+}
+const removeItem = (item) => {
+  list.value = list.value.filter(el => el !== item)
+}
+
 </script>
 
 <template>
@@ -15,9 +41,9 @@ const count = ref(0)
     <div class="main-page__container">
 
       <div class="main-page__form-container">
-        <Form class="main-page__form"/>
+        <Form class="main-page__form" @add-item="addItem"/>
       </div>
-      <CardList class="main-page__card-list" />
+      <CardList :list="list" class="main-page__card-list" @remove-item="removeItem" />
     </div>
   </section>
 

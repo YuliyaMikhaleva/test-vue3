@@ -2,7 +2,7 @@
   <article class="card">
     <div class="card__actions">
       <Button circle action="edit" />
-      <Button circle action="buy" />
+      <Button circle action="buy" @click="emit('remove-item')" />
     </div>
     <div class="card__image">
       <picture>
@@ -38,7 +38,7 @@ defineProps({
     default: () => '',
   },
 })
-
+const emit = defineEmits([ 'remove-item' ]);
 onMounted(() => {
   // console.log('mounted card')
 });

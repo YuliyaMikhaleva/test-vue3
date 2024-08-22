@@ -8,15 +8,19 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { numbers } from 'helpers/validation';
 
-const productData = ref({
-  name: '',
+const initialState = {
+  title: '',
   price: '',
   text: '',
   photo: null,
+}
+
+const productData = ref({
+  ...initialState
 })
 
 const formRules = {
-  name: {
+  title: {
     required,
     minLength:minLength(1),
   },
@@ -26,7 +30,7 @@ const formRules = {
     numbers,
   }
 };
-
+const emit = defineEmits([ 'add-item' ]);
 const v$ = useVuelidate(formRules, productData);
 
 const props = defineProps({
@@ -51,13 +55,26 @@ watch(productData, (newData, oldPhoto) => {
 
 const disabledButton = computed(() => {
 
-  return (productData.value.name) ? false : true
+  return (productData.value.title) ? false : true
 });
 
-const handler = () => {
-  console.log('productData', productData.value)
-  v$.value.$touch();
+const clearForm = () => {
+  productData.value = {
+    ...initialState
+  };
+  v$.value.$reset();
+
 }
+
+const submitHandler = () => {
+  v$.value.$touch();
+  if (!v$.value.$error) {
+    alert('отправка');
+    emit('add-item', productData.value);
+    clearForm();
+  }
+}
+
 
 onMounted(() => {
 
@@ -65,11 +82,11 @@ onMounted(() => {
 
 </script>
 <template>
-  <form class="form" @submit.prevent="handler">
+  <form class="form" @submit.prevent="submitHandler">
     <h2 class="form__title">Добавление товара</h2>
     <p class="form__text">Заполните все обязательные поля с *</p>
-    <TextInput class="form__input" placeholder="Название*" v-model="productData.name" :is-error="v$.name.$error" :is-success="v$.name.$dirty && !v$.name.$invalid" error-text="Обязательное поле для заполнения"/>
-    <TextInput class="form__input" placeholder="Цена*" v-model="productData.price" :is-error="v$.price.$error" :is-success="v$.price.$dirty && !v$.price.$invalid" error-text="Обязательное поле для заполнения: только цифры"/>
+    <TextInput class="form__input" placeholder="Название*" v-model="productData.title" :is-error="v$.title.$error" :is-success="v$.title.$dirty && !v$.title.$invalid" error-text="Обязательное поле для заполнения"   @drop-error="v$.title.$reset()"  />
+    <TextInput class="form__input" placeholder="Цена*" v-model="productData.price" :is-error="v$.price.$error" :is-success="v$.price.$dirty &&  !v$.price.$invalid" error-text="Обязательное поле для заполнения: только цифры"  @drop-error="v$.price.$reset()"/>
     <FileInput class="form__input" placeholder="Фото" v-model="productData.photo" />
 <!--    <pre>{{ // getPlainObject() }}</pre> &lt;!&ndash; Вызов метода для отображения чистого объекта &ndash;&gt;-->
     <TextArea class="form__input" placeholder="Описание товара" v-model="productData.text"/>
