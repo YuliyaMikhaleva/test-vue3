@@ -48,4 +48,25 @@
       }
     }
   }
+
+  &--error {
+    input[type="text"], input[type="password"] {
+      border-color: #F23C3C;
+      box-shadow: 2px 4px 4px rgba(#F23C3C,0.25);
+    }
+  }
+
+  &--success {
+    input[type="text"], input[type="password"] {
+      border-color: #406FE9;
+      box-shadow: 2px 4px 4px rgba(#406FE9,0.25);
+    }
+  }
+
+  &__error {
+    color: #F23C3C;
+    @include fontAdaptive(7px, 8.47px, 400);
+    position: absolute;
+    bottom: -8px;
+  }
 }
