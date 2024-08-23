@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
 import Form from "../../components/_UiComponents/Form/Form.vue";
 import CardList from "../../components/CardList/CardList.vue";
 import {useStateStore} from "../../store/index.js";
@@ -7,8 +7,8 @@ const store = useStateStore();
 let initialState = ref({
   title: '',
   price: '',
-  text: '',
-  photo: null,
+  description: '',
+  image: null,
 })
 
 const editedItem = ref(null)
@@ -16,8 +16,8 @@ const clearForm = () => {
   initialState.value = {
     title: '',
     price: '',
-    text: '',
-    photo: null,
+    description: '',
+    image: null,
   };
   editedItem.value = null
 }
@@ -42,6 +42,10 @@ const editItem = (item) => {
     ...item,
   };
 }
+
+onMounted(() => {
+  store.getProducts();
+})
 
 </script>
 

@@ -11,3 +11,6 @@ npm run dev
 
 pinia
 yarn add pinia
+npm i express и npm i express-fileupload
+в файле database/controllers.js меняем в перменной pathFile путь куда нужно сохранять картинки
+после этого для запуска прописываем node database.js

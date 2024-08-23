@@ -1,8 +1,8 @@
 <template>
   <div class="file-input">
-    <div v-if="selectedFile && selectedFile.file && selectedFile.file.name" class="file-input__label" @click.stop>
+    <div v-if="selectedFile && selectedFile.file" class="file-input__label" @click.stop>
       <span class="file-input__placeholder file-input__placeholder--file">
-        {{ selectedFile.file.name }}
+        {{ selectedFile.file.name ? selectedFile.file.name : selectedFile.file }}
       </span>
       <div class="file-input__icon file-input__icon--file" @click="selectedFile.file = null; emit('remove-file')">
         <DeleteIcon />

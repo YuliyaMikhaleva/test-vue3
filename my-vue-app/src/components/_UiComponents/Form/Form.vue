@@ -95,13 +95,13 @@ onMounted(() => {
 </script>
 <template>
   <form class="form" @submit.prevent="submitHandler">
-    <h2 class="form__title">Добавление товара</h2>
+    <h2 class="form__title">{{ edit ? 'Редактирование' : 'Добавление'}} товара</h2>
     <p class="form__text">Заполните все обязательные поля с *</p>
     <TextInput class="form__input" placeholder="Название*" v-model="productData.title" :is-error="v$.title.$error" :is-success="v$.title.$dirty && !v$.title.$invalid" error-text="Обязательное поле для заполнения"   @drop-error="v$.title.$reset()"  />
     <TextInput class="form__input" placeholder="Цена*" v-model="productData.price" :is-error="v$.price.$error" :is-success="v$.price.$dirty &&  !v$.price.$invalid" error-text="Обязательное поле для заполнения: только цифры"  @drop-error="v$.price.$reset()"/>
-    <FileInput class="form__input" placeholder="Фото" v-model="productData.photo" :edit="edit" @remove-file="productData.photo = null"/>
+    <FileInput class="form__input" placeholder="Фото" v-model="productData.image" :edit="edit" @remove-file="productData.image = null"/>
 <!--    <pre>{{ // getPlainObject() }}</pre> &lt;!&ndash; Вызов метода для отображения чистого объекта &ndash;&gt;-->
-    <TextArea class="form__input" placeholder="Описание товара" v-model="productData.text"/>
+    <TextArea class="form__input" placeholder="Описание товара" v-model="productData.description"/>
     <Button class="form__button" :disabled="disabledButton" :cancel="cancelButton">{{ edit ? 'Редактировать товар' : 'Добавить товар' }}</Button>
     <Button @click="emit('clear-form')" v-if="edit" cancel>Отменить редактирование</Button>
   </form>

@@ -1,6 +1,6 @@
 <template>
   <div class="card-list">
-    <Card class="card-list__card" v-if="arrayCards.length>0" v-for="(card, k) in arrayCards" :title="card.title" :text="card.text" :price="card.price" :image="card.photo" :key="k" @remove-item="emit('remove-item', card)" @edit-item="emit('edit-item', card)" />
+    <Card class="card-list__card" v-if="arrayCards.length>0" v-for="(card, k) in arrayCards" :title="card.title" :text="card.description" :price="card.price" :image="card.image" :key="k" @remove-item="emit('remove-item', card)" @edit-item="emit('edit-item', card)" />
     <h1 v-else class="card-list__note">
       <TimeIcon />
       <span>В данный момент товары отсутствуют</span>
